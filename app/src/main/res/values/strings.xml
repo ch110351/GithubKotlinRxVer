@@ -5,4 +5,5 @@
     <string name="users_list_title">Users</string>
     <string name="staff">STAFF</string>
     <string name="network_not_available">Network not available</string>
+    <string name="error_message">Load Info Failed</string>
 </resources>

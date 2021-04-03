@@ -53,7 +53,7 @@ class UserInfoFragment : Fragment() {
 
         userInfoViewModel.errorMsg.observe(viewLifecycleOwner, Observer {
             it?.let {
-                Toast.makeText(activity, R.string.network_not_available, Toast.LENGTH_SHORT).show()
+                Toast.makeText(activity, R.string.error_message, Toast.LENGTH_SHORT).show()
             }
         })
     }
