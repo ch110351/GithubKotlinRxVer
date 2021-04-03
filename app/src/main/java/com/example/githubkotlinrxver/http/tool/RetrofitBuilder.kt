@@ -42,6 +42,7 @@ object RetrofitBuilder {
     class HeaderInterceptor : Interceptor {
         override fun intercept(chain: Interceptor.Chain): Response {
             val request = chain.request().newBuilder()
+            //Github api Basic Authentication　
             request.addHeader("Content-Type", "application/json;charset=UTF-8")
                 .addHeader(
                     "Authorization",

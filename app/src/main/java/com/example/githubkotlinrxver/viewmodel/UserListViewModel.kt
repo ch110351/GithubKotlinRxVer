@@ -4,18 +4,15 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
 import androidx.paging.LivePagedListBuilder
 import androidx.paging.PagedList
-import androidx.paging.toLiveData
 import com.example.githubkotlinrxver.data.UserListItem
 import com.example.githubkotlinrxver.http.api.USER_INITIAL_KEY
 import com.example.githubkotlinrxver.http.api.USER_PAGE_SIZE
-import com.example.githubkotlinrxver.paging.UserListSourceFactory
+import com.example.githubkotlinrxver.ui.adapter.paging.UserListSourceFactory
 import io.reactivex.disposables.CompositeDisposable
 
 
 class UserListViewModel(userListSourceFactory: UserListSourceFactory) : ViewModel() {
     private val disposables = CompositeDisposable()
-
-    //var pagedList: LiveData<PagedList<UserListItem>> = userListSourceFactory.toLiveData(20, null)
     val pagedList: LiveData<PagedList<UserListItem>>
 
     override fun onCleared() {
