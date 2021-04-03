@@ -1,11 +1,10 @@
 package com.example.githubkotlinrxver.repository
 
-import com.example.githubkotlinrxver.data.ApiResponse
+
 import com.example.githubkotlinrxver.data.UserInfo
 import com.example.githubkotlinrxver.data.UserListItem
 import com.example.githubkotlinrxver.http.tool.RetrofitBuilder.apiService
 import io.reactivex.Single
-import retrofit2.Response
 
 interface ApiRepository {
     //API

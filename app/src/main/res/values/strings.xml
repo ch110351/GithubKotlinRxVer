@@ -1,4 +1,8 @@
 <resources>
     <string name="app_name">GithubKotlinRxVer</string>
     <string name="users_list_fragment_label">Github Users</string>
+    <string name="user_info_fragment_label">User Info</string>
+    <string name="users_list_title">Users</string>
+    <string name="staff">STAFF</string>
+    <string name="network_not_available">Network not available</string>
 </resources>

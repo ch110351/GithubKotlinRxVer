@@ -9,6 +9,7 @@ import retrofit2.http.GET
 import retrofit2.http.Path
 import retrofit2.http.Query
 
+//每一頁20筆資料
 const val USER_PAGE_SIZE = 20
 const val USER_INITIAL_KEY = 0L
 
