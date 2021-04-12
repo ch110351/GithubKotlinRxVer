@@ -17,18 +17,18 @@ class UserInfoViewModel(private val apiRepository: ApiRepository) : ViewModel() 
     //對應至api user login 參數
     var userLogin: String? = null
 
-    private val _user = MutableLiveData<UserInfo>()
-    val user: LiveData<UserInfo> = _user
+    private val userInfo = MutableLiveData<UserInfo>()
+    val user: LiveData<UserInfo> = userInfo
 
     private fun updateUser(user: UserInfo) {
-        _user.value = user
+        userInfo.value = user
     }
 
-    private val _errorMsg = MutableLiveData<String>()
-    val errorMsg: LiveData<String> = _errorMsg
+    private val errorStr = MutableLiveData<String>()
+    val errorMsg: LiveData<String> = errorStr
 
     private fun updateError(errorMsg: String) {
-        _errorMsg.value = errorMsg
+        errorStr.value = errorMsg
     }
 
     override fun onCleared() {
@@ -38,12 +38,14 @@ class UserInfoViewModel(private val apiRepository: ApiRepository) : ViewModel() 
 
     @SuppressLint("CheckResult")
     fun getUserInfo() {
-        apiRepository.getUserInfo(userLogin!!).compose(NetworkScheduler.singleCompose())
-            .subscribe({ userInfo ->
-                updateUser(userInfo)
-            }, {
-                it.message?.let { it1 -> updateError(it1) }
-            })
+        userLogin?.let { it ->
+            apiRepository.getUserInfo(it).compose(NetworkScheduler.singleCompose())
+                .subscribe({ userInfo ->
+                    updateUser(userInfo)
+                }, {
+                    it.message?.let { it1 -> updateError(it1) }
+                })
+        }
     }
 
 }

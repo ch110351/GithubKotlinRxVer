@@ -67,10 +67,8 @@ class UserListFragment : Fragment() {
             this.adapter = adapter
         }
 
-        userListViewModel.pagedList.observe(viewLifecycleOwner, Observer {
-            it?.let {
-                adapter.submitList(it)
-            }
+        userListViewModel.pagedList.observe(viewLifecycleOwner, Observer { pageList ->
+            adapter.submitList(pageList)
         })
 
         getNetworkLiveData().observe(viewLifecycleOwner, Observer { available ->
