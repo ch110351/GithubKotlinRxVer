@@ -23,10 +23,9 @@ abstract class DataBindingPagingAdapter<T>(
         return DataBindingViewHolder(binding, itemClick)
     }
 
-    override fun onBindViewHolder(holder: DataBindingViewHolder<T>, position: Int): Unit =
-        position?.let {
-            getItem(position)?.let { it1 -> holder.bind(it1) }
-        }
+    override fun onBindViewHolder(holder: DataBindingViewHolder<T>, position: Int) {
+        getItem(position)?.let { item -> holder.bind(item) }
+    }
 }
 
 
@@ -39,8 +38,9 @@ class DataBindingViewHolder<T>(
 
     fun bind(item: T) {
         binding.setVariable(BR.item, item)
-        if (itemClick != null)
+        itemClick?.let {
             binding.setVariable(BR.itemclick, itemClick)
+        }
         binding.executePendingBindings()
     }
 }

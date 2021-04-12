@@ -1,10 +1,7 @@
 package com.example.githubkotlinrxver.http.tool
 
-import com.example.githubkotlinrxver.common.Constant.Companion.GITHUB_API_TOKEN
-import com.example.githubkotlinrxver.common.Constant.Companion.GITHUB_USER
 import com.example.githubkotlinrxver.common.Constant.Companion.HOST_URL
 import com.example.githubkotlinrxver.http.api.ApiService
-import okhttp3.Credentials
 import okhttp3.Interceptor
 import okhttp3.OkHttpClient
 import okhttp3.Response
@@ -39,17 +36,18 @@ object RetrofitBuilder {
             .create(ApiService::class.java)
     }
 
+    /**
+     * github api 不建議將personal access token 推上Github,已移除
+     */
     class HeaderInterceptor : Interceptor {
         override fun intercept(chain: Interceptor.Chain): Response {
             val request = chain.request().newBuilder()
             //Github api Basic Authentication　
             request.addHeader("Content-Type", "application/json;charset=UTF-8")
-                .addHeader(
-                    "Authorization",
-                    Credentials.basic(GITHUB_USER, GITHUB_API_TOKEN)
-                )
             return chain.proceed(request.build())
         }
 
     }
+
+
 }

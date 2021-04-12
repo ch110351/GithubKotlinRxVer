@@ -46,15 +46,11 @@ class UserInfoFragment : Fragment() {
 
     private fun initView() {
         userInfoViewModel.user.observe(viewLifecycleOwner, Observer {
-            it?.let { userInfo ->
-                viewBinding.user = userInfo
-            }
+            viewBinding.user = it
         })
 
         userInfoViewModel.errorMsg.observe(viewLifecycleOwner, Observer {
-            it?.let {
-                Toast.makeText(activity, R.string.error_message, Toast.LENGTH_SHORT).show()
-            }
+            Toast.makeText(activity, R.string.error_message, Toast.LENGTH_SHORT).show()
         })
     }
 }
