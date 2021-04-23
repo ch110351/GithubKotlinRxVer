@@ -4,21 +4,11 @@
 
     <data>
 
-        <import type="android.view.View" />
-
-        <variable
-            name="item"
-            type="com.example.githubkotlinrxver.data.UserListItem" />
-
-        <variable
-            name="itemclick"
-            type="com.example.githubkotlinrxver.widget.ItemClick" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:onClick="@{(view)->itemclick.onClicked(view,item)}">
+        android:layout_height="wrap_content">
 
         <androidx.constraintlayout.widget.Guideline
             android:id="@+id/guideline_image_end"
@@ -28,8 +18,7 @@
             app:layout_constraintGuide_percent="0.2" />
 
         <ImageView
-            android:id="@+id/avatar_url"
-            url_img="@{item.avatarUrl}"
+            android:id="@+id/img_avatar_url"
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:padding="12dp"
@@ -43,31 +32,29 @@
             android:layout_height="0dp"
             android:orientation="vertical"
             android:padding="@dimen/user_info_content_container_padding"
-            app:layout_constraintBottom_toBottomOf="@+id/avatar_url"
+            app:layout_constraintBottom_toBottomOf="@+id/img_avatar_url"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="@+id/guideline_image_end"
-            app:layout_constraintTop_toTopOf="@+id/avatar_url">
+            app:layout_constraintTop_toTopOf="@+id/img_avatar_url">
 
             <TextView
-                android:id="@+id/login"
+                android:id="@+id/txt_login"
                 android:layout_width="wrap_content"
                 android:layout_height="0dp"
                 android:layout_weight="1"
                 android:gravity="center"
-                android:text="@{item.login}"
                 android:textColor="@color/black"
                 android:textSize="@dimen/user_info_text_size" />
 
             <TextView
-                android:id="@+id/site_admin"
+                android:id="@+id/txt_site_admin"
                 android:layout_width="wrap_content"
                 android:layout_height="0dp"
                 android:layout_weight="1"
                 android:background="@drawable/shape_staff"
                 android:gravity="center"
                 android:text="@string/staff"
-                android:textColor="@color/white"
-                android:visibility="@{item.siteAdmin==true? View.VISIBLE: View.GONE}" />
+                android:textColor="@color/white" />
         </LinearLayout>
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
