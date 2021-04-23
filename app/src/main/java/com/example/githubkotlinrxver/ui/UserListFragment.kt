@@ -2,7 +2,6 @@ package com.example.githubkotlinrxver.ui
 
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -16,9 +15,9 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.githubkotlinrxver.R
 import com.example.githubkotlinrxver.data.UserListItem
 import com.example.githubkotlinrxver.databinding.UsersListFragmentBinding
-import com.example.githubkotlinrxver.ui.adapter.UserListAdapter
+import com.example.githubkotlinrxver.ui.adapter.UserPageListAdapter
 import com.example.githubkotlinrxver.viewmodel.UserListViewModel
-import com.example.githubkotlinrxver.widget.ItemClick
+import com.example.githubkotlinrxver.widget.OnItemClickListener
 import com.example.githubkotlinrxver.widget.getNetworkLiveData
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
@@ -44,31 +43,34 @@ class UserListFragment : Fragment() {
     }
 
     private fun initView() {
-        val adapter = UserListAdapter(object : ItemClick<UserListItem> {
-            override fun onClicked(view: View, userListItem: UserListItem) {
+        val userPageListAdapter = UserPageListAdapter(object : OnItemClickListener<UserListItem> {
+            override fun onItemClick(t: UserListItem) {
                 //跳轉至user info頁面
                 val usersList2UserInfo =
                     UserListFragmentDirections.actionUsersListFragmentToUserInfoFragment(
-                        userListItem.login
+                        t.login
                     )
-                Navigation.findNavController(view)
-                    .navigate(usersList2UserInfo)
+                view?.let { it ->
+                    Navigation.findNavController(it)
+                        .navigate(usersList2UserInfo)
+                }
+
             }
         })
 
-        viewBinding.usersListView.apply {
+        viewBinding.recycleViewUsers.apply {
             layoutManager = LinearLayoutManager(requireContext())
             addItemDecoration(
                 DividerItemDecoration(
-                    viewBinding.usersListView.context,
-                    (viewBinding.usersListView.layoutManager as LinearLayoutManager).orientation
+                    viewBinding.recycleViewUsers.context,
+                    (viewBinding.recycleViewUsers.layoutManager as LinearLayoutManager).orientation
                 )
             )
-            this.adapter = adapter
+            this.adapter = userPageListAdapter
         }
 
         userListViewModel.pagedList.observe(viewLifecycleOwner, Observer { pageList ->
-            adapter.submitList(pageList)
+            userPageListAdapter.submitList(pageList)
         })
 
         getNetworkLiveData().observe(viewLifecycleOwner, Observer { available ->
