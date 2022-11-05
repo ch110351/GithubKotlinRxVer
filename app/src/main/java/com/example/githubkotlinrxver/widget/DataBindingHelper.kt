@@ -18,14 +18,22 @@ class DataBindingHelper {
         @BindingAdapter("url_img")
         @JvmStatic
         fun imgFromUrl(imageView: ImageView, url: String?) {
-            GlobalScope.launch(Dispatchers.Main) {
-                Glide.with(imageView.context)
-                        .load(url).apply(RequestOptions().circleCrop())
-                        .placeholder(R.drawable.avatar_def)
-                        .error(R.drawable.avatar_error)
-                        .diskCacheStrategy(DiskCacheStrategy.ALL)
-                        .into(imageView)
-            }
+
+            Glide.with(imageView.context)
+                .load(url).apply(RequestOptions().circleCrop())
+                .placeholder(R.drawable.avatar_def)
+                .error(R.drawable.avatar_error)
+                .diskCacheStrategy(DiskCacheStrategy.ALL)
+                .into(imageView)
+
+//            GlobalScope.launch(Dispatchers.Main) {
+//                Glide.with(imageView.context)
+//                        .load(url).apply(RequestOptions().circleCrop())
+//                        .placeholder(R.drawable.avatar_def)
+//                        .error(R.drawable.avatar_error)
+//                        .diskCacheStrategy(DiskCacheStrategy.ALL)
+//                        .into(imageView)
+//            }
         }
     }
 }
